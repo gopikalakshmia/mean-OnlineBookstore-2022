@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { BookModel } from '../../models/book.model';
 
 @Component({
@@ -10,7 +10,7 @@ export class BookCardComponent implements OnInit {
 
   constructor() { }
 
- books:BookModel[];
+ @Input() book:BookModel;
   ngOnInit(): void {
   }
 
