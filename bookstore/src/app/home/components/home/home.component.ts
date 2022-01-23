@@ -1,3 +1,4 @@
+import { BookserviceService } from './../../../book/services/bookservice.service';
 import { Component, OnInit } from '@angular/core';
 import { BookModel } from 'src/app/book/models/book.model';
 
@@ -9,13 +10,13 @@ import { BookModel } from 'src/app/book/models/book.model';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bookService:BookserviceService) { }
   books:BookModel[];
 
   ngOnInit(): void {
 
     this.books=[];
-    let book:BookModel=new BookModel();
+    /*let book:BookModel=new BookModel();
     book.id=1;
     book.name="Kite Runner";
     book.author="Khaled Hosseini";
@@ -28,8 +29,14 @@ export class HomeComponent implements OnInit {
     book2.author="Malala";
     
     book2.imgSrc="/assets/img/malala.jpg";
-    this.books.push(book2);
+    this.books.push(book2);*/
 
+    const bookObservable = this.bookService.getBooks();
+    bookObservable.subscribe(
+        (result)=>{this.books=result;},
+        (err)=>{console.log(err)},
+        ()=>{console.log("done")}
+    )
   }
 
 }

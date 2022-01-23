@@ -4,12 +4,14 @@ const express=require("express");
 const bookRoutes=require("./routers/book");
 
 const mongodb=require("./configs/mongodb");
+const cors = require("cors");
 //create server
 const server=express();
 
 mongodb.connect();
 //assigning port
 server.listen("3100");
+server.use(cors("*"));
 //custom routes
 server.use('/api/Book',bookRoutes);
 
